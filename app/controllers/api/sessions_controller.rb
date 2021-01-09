@@ -13,7 +13,7 @@ class Api::SessionsController < ApplicationController
     end
 
     def destroy
-        if !current_user
+        if current_user.nil?
             render json: ["No Current User"], status: 404
         end
         logout!

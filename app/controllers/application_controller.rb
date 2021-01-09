@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
     def logout!
         # reset session token of the app
-        session[:session_token] = nil
         current_user.reset_session_token!
+        session[:session_token] = nil
     end
 
     # We will need this for preload state as well
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         # check for app's session
         return nil unless session[:session_token]
         # return or find user with matching session token
-        @current_user ||= User.find(session_token: session[:session_token])
+        @current_user ||= User.find_by(session_token: session[:session_token])
     end
 
     # rails would have 
