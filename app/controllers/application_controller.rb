@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
     # sets the app's session token to be user's
 
-    helper_method :current_user
+    helper_method :current_user, :logged_in?
 
     def login!(user)
         session[:session_token] = user.session_token
@@ -21,8 +21,11 @@ class ApplicationController < ActionController::Base
         @current_user ||= User.find_by(session_token: session[:session_token])
     end
 
+    def logged_in?
+        !!current_user
+    end
+
     # rails would have 
-    # logged_in?
     # require_logged_out
     # require_logged_in
     # BUT we will use Auth and Protected in frontend to handle this
