@@ -36,6 +36,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bcrypt'
 gem 'jquery-rails'
+gem 'figaro'
 
 
 group :development, :test do

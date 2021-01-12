@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+b1 = Bench.create!(
+    description: 'first spot',
+    lat: 37.771056,
+    lng: -122.458306
+    )
