@@ -8,14 +8,14 @@ class BenchMap extends React.Component {
             center: { lat: 37.7758, lng: -122.435 }, // this is SF
             zoom: 13
         };
-
         // wrap this.mapNode in a Google Map
         this.map = new google.maps.Map(this.mapNode, mapOptions);
-
+        // Manager to maintain references to our markers
         this.MarkerManager = new MarkerManager(this.map);
     }
 
     componentDidUpdate() {
+        // search container passes benches to bench map through search
         this.MarkerManager.updateMarkers(this.props.benches);
         // Idle event
         google.maps.event.addListener(this.map, 'idle', ()=>{

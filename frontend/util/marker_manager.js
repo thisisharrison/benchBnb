@@ -6,15 +6,32 @@ class MarkerManager {
         this.markers = {};
     }
     updateMarkers(benches) {
-        benches.map(bench => this.createMarkerFromBench(bench));
+        const benchObject = {};
+        if (benches.length > 0) {
+            benches.forEach(bench => benchObject[bench.id] = bench);
+            // Create net new bench for new markers that was not registered before
+            benches.filter(bench => !this.markers[bench.id])
+                .forEach(newBench => this.createMarkerFromBench(newBench));
+        }
+        // Remove benches outside of frame
+        Object.keys(this.markers)
+            .filter(prevIds => !benchObject[prevIds])
+            .forEach(benchId => this.removeMarker(benchId))
+
     }
-    createMarkerFromBench({lat, lng, description}) {
+    createMarkerFromBench({id, lat, lng, description}) {
         const myLatlng = new google.maps.LatLng(lat, lng);
-        return new google.maps.Marker({
+        const marker = new google.maps.Marker({
             position: myLatlng,
             map: this.map,
             title: description,
+            benchId: id
         });
+        this.markers[id] = marker;
+    }
+    removeMarker(benchId) {
+        this.markers[benchId].setMap(null);
+        delete this.markers[benchId];
     }
 }
 
