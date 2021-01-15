@@ -5,9 +5,10 @@ class BenchIndex extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
-        this.props.fetchBenches();
-    }
+    // Will rely on updateFilters to fetchBenches
+    // componentDidMount() {
+    //     this.props.fetchBenches();
+    // }
 
     render() {
         const benches = this.props.benches;

@@ -12,16 +12,18 @@ class BenchMap extends React.Component {
         this.map = new google.maps.Map(this.mapNode, mapOptions);
         // Manager to maintain references to our markers
         this.MarkerManager = new MarkerManager(this.map);
+        this.registerListeners();
     }
 
     componentDidUpdate() {
-        // search container passes benches to bench map through search
         this.MarkerManager.updateMarkers(this.props.benches);
-        // Idle event
-        google.maps.event.addListener(this.map, 'idle', ()=>{
-            const {north, south, east, west} = this.map.getBounds().toJSON();
-            const bounds = {bounds: {northEast: {lat: north, lng: east}, southWest: {lat: south, lng: west}}}
-            this.props.updateBounds(bounds);
+    }
+
+    registerListeners() {
+        google.maps.event.addListener(this.map, 'idle', () => {
+            const { north, south, east, west } = this.map.getBounds().toJSON();
+            const bounds = { bounds: { northEast: { lat: north, lng: east }, southWest: { lat: south, lng: west } } }
+            this.props.updateFilter('bounds', bounds);
         });
     }
 
