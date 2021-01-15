@@ -1,5 +1,11 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import MarkerManager from '../../util/marker_manager';
+
+const getCoordsObj = latLng => ({
+    lat: latLng.lat(),
+    lng: latLng.lng()
+});
 
 class BenchMap extends React.Component {
     componentDidMount() {
@@ -25,6 +31,18 @@ class BenchMap extends React.Component {
             const bounds = { bounds: { northEast: { lat: north, lng: east }, southWest: { lat: south, lng: west } } }
             this.props.updateFilter('bounds', bounds);
         });
+
+        google.maps.event.addListener(this.map, 'click', (e) => {
+            const coords = getCoordsObj(e.latLng);
+            this._handleClick(coords);
+        });
+    }
+
+    _handleClick(coords) {
+        this.props.history.push({
+            pathname: 'benches/new',
+            search: `lat=${coords.lat}&lng=${coords.lng}`
+        })
     }
 
     render() { 
@@ -37,4 +55,5 @@ class BenchMap extends React.Component {
     }
 }
 
-export default BenchMap;
+// Exporting a wrapped component, it will have a history router prop
+export default withRouter(BenchMap);
