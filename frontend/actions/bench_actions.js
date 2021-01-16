@@ -20,3 +20,7 @@ export const fetchBenches = (data) => (dispatch, getState) => {
 export const createBench = (data) => (dispatch) => 
     APIUtil.createBench(data)
         .then(bench => dispatch(receiveBench(bench)))
+
+export const fetchBench = id => (dispatch) => 
+    APIUtil.fetchBench(id)
+        .then(bench => dispatch(recieveBench(bench)))

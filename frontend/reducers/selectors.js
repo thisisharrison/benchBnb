@@ -9,3 +9,7 @@ export const getMinSeating = ({ ui: {filters: { minSeating }}}) => (
 export const getMaxSeating = ({ ui: { filters: { maxSeating } }}) => (
     maxSeating
 )
+
+export const selectBench = ({entities: {benches}}, benchId) => (
+    benches[benchId]
+)

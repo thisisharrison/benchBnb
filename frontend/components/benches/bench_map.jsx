@@ -10,25 +10,40 @@ const getCoordsObj = latLng => ({
 class BenchMap extends React.Component {
     componentDidMount() {
         // set the map to show SF
-        const mapOptions = {
+        let mapOptions = {
             center: { lat: 37.7758, lng: -122.435 }, // this is SF
             zoom: 13
         };
         // wrap this.mapNode in a Google Map
         this.map = new google.maps.Map(this.mapNode, mapOptions);
         // Manager to maintain references to our markers
-        this.MarkerManager = new MarkerManager(this.map);
-        this.registerListeners();
+        this.MarkerManager = new MarkerManager(this.map, this.handleMarkerClick.bind(this));
+        
+        if (this.props.singleBench) { 
+            this.props.fetchBench(this.props.benchId)
+        } else {
+            this.registerListeners();
+        }
     }
 
     componentDidUpdate() {
-        this.MarkerManager.updateMarkers(this.props.benches);
+        if (this.props.singleBench) {
+            const targetBenchKey = Object.keys(this.props.benches)[0];
+            const targetBench = this.props.benches[targetBenchKey];
+            this.MarkerManager.updateMarkers([targetBench]);
+            this.map.setCenter({ lat: targetBench.lat, lng: targetBench.lng });
+            this.map.setOptions({ draggable: false });
+            this.MarkerManager.removeClick();
+        } else {
+            this.MarkerManager.updateMarkers(this.props.benches);
+        }
     }
 
     registerListeners() {
         google.maps.event.addListener(this.map, 'idle', () => {
             const { north, south, east, west } = this.map.getBounds().toJSON();
             const bounds = { northEast: { lat: north, lng: east }, southWest: { lat: south, lng: west } }
+            // Find the bench that was fetched at mount
             this.props.updateFilter('bounds', bounds);
         });
 
@@ -43,6 +58,10 @@ class BenchMap extends React.Component {
             pathname: 'benches/new',
             search: `lat=${coords.lat}&lng=${coords.lng}`
         })
+    }
+
+    handleMarkerClick(id) {
+        this.props.history.push(`benches/${id}`)
     }
 
     render() { 
