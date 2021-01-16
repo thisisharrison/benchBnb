@@ -3,7 +3,7 @@ import BenchMap from '../benches/bench_map';
 import BenchIndex from '../benches/bench_index';
 import FilterForm from './filter_form';
 
-const Search = ({ benches, updateFilter }) => (
+const Search = ({ benches, updateFilter, maxSeating, minSeating }) => (
     <div>
         <BenchMap 
             benches={benches}
@@ -14,6 +14,8 @@ const Search = ({ benches, updateFilter }) => (
         />
         <FilterForm 
             updateFilter={updateFilter}
+            maxSeating={maxSeating}
+            minSeating={minSeating}
         />
     </div>
 )
