@@ -5,6 +5,7 @@ import Root from './components/root';
 // Testing
 import { signup, login, logout } from './actions/session_actions'
 import { fetchBenches } from './actions/bench_actions';
+import { receiveReview } from './actions/review_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.getState = store.getState;
     window.dispatch = store.dispatch;
     window.fetchBenches = fetchBenches;
+    window.receiveReview = receiveReview;
 
     ReactDOM.render(<Root store={store}/>, root);
 })

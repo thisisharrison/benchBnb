@@ -3,7 +3,7 @@ import ReviewItemContainer from '../reviews/review_item_container';
 import { Link } from 'react-router-dom';
 
 const reviewList = (reviews) => (
-    reviews.map(review => <ReviewItemContainer review={review}/>)
+    reviews.map(review => <ReviewItemContainer key={review} review={review}/>)
 );
 
 const BenchDetail = ({bench, reviews}) => {

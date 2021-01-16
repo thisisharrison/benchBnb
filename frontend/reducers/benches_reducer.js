@@ -1,8 +1,8 @@
 import { 
     RECEIVE_BENCHES,
     RECEIVE_BENCH,
-    RECEIVE_REVIEW
 } from '../actions/bench_actions';
+import { RECEIVE_REVIEW } from '../actions/review_actions';
 
 const benchesReducer = (state = {}, action) => {
     Object.freeze(state);
