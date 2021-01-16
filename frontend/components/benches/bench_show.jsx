@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ProtectedRoute } from '../../util/route_util';
 import BenchMap from "./bench_map"
 import BenchDetail from './bench_detail'
+import ReviewFormContainer from '../reviews/review_form_container';
 
 class BenchShow extends React.Component {
     constructor(props) {
@@ -24,8 +25,13 @@ class BenchShow extends React.Component {
                     fetchBench={fetchBench}/>
                 <BenchDetail 
                     bench={bench}
+                    benchId={benchId}
                     reviews={reviews}
                 />
+                <Link to={`/benches/${benchId}/review`}
+                    component={ReviewFormContainer}>
+                    Leave a review
+                </Link>
             </div>
         )
     }

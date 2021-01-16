@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewItemContainer from '../reviews/review_item_container';
+import { Link } from 'react-router-dom';
 
 const reviewList = (reviews) => (
     reviews.map(review => <ReviewItemContainer review={review}/>)
