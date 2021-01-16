@@ -14,16 +14,3 @@ export const updateFilter = (filter, value) => (dispatch, getState) => {
     dispatch(changeFilter(filter, value));
     return fetchBenches(getState().ui.filters)(dispatch);
 }
-
-// export const UPDATE_BOUNDS = 'UPDATE_BOUNDS';
-// export const changeBounds = bounds => (
-//     {
-//         type: UPDATE_BOUNDS,
-//         bounds
-//     }
-// )
-
-// export const updateBounds = bounds => (dispatch, getState) => {
-//     dispatch(changeBounds);
-//     return dispatch(fetchBenches(bounds));
-// }

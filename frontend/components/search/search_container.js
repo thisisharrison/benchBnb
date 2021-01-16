@@ -1,11 +1,14 @@
 import { connect } from "react-redux";
 import { fetchBenches } from "../../actions/bench_actions";
+import { benchArray, getMaxSeating, getMinSeating } from '../../reducers/selectors';
 import { updateFilter } from "../../actions/filter_actions";
 import Search from './search';
 
-const mapStateToProps = ({ entities: { benches } }) => (
+const mapStateToProps = state => (
     {
-        benches: Object.keys(benches).map(key => benches[key])
+        benches: benchArray(state),
+        minSeating: getMinSeating(state),
+        maxSeating: getMaxSeating(state)
     }
 );
 
