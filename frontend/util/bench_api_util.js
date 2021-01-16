@@ -1,5 +1,3 @@
-import { connect } from "react-redux"
-
 export const fetchBenches = data => (
     $.ajax({
         method: 'GET',
@@ -21,5 +19,13 @@ export const fetchBench = id => (
     $.ajax({
         method: 'GET',
         url: `api/benches/${id}`,
+    })
+)
+
+export const postReview = review => (
+    $.ajax({
+        method: 'POST',
+        url: `api/reviews`,
+        data: {review}
     })
 )

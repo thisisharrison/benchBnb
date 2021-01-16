@@ -7,9 +7,11 @@ export const receiveBenches = benches => ({
     benches
 });
 
-export const receiveBench = bench => ({
+export const receiveBench = ({ bench, reviews, authors }) => ({
     type: RECEIVE_BENCH,
-    bench
+    bench, 
+    reviews,
+    authors
 });
 
 export const fetchBenches = (data) => (dispatch, getState) => {

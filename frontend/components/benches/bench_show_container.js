@@ -4,11 +4,11 @@ import { selectBench } from '../../reducers/selectors';
 import BenchShow from './bench_show';
 
 const mapStateToProps = (state, ownProps) => {
-    const benchId = ownProps.match.params.benchId;
-    const bench = selectBench(state, benchId)
+    const benchId = parseInt(ownProps.match.params.benchId);
+    const bench = selectBench(state, benchId);
     return ({
         benchId,
-        bench
+        bench,
     })
 };
 

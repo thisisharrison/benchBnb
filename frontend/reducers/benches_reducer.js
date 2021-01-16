@@ -1,14 +1,8 @@
 import { 
     RECEIVE_BENCHES,
-    RECEIVE_BENCH
+    RECEIVE_BENCH,
+    RECEIVE_REVIEW
 } from '../actions/bench_actions';
-
-const defaultState = {
-    id: '', 
-    description: '', 
-    lat: '', 
-    lng: ''
-};
 
 const benchesReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -16,7 +10,14 @@ const benchesReducer = (state = {}, action) => {
         case RECEIVE_BENCHES: 
             return action.benches;
         case RECEIVE_BENCH:
-            return Object.assign({}, state, action.bench);
+            const newBench = {[action.bench.id] : action.bench};
+            return Object.assign({}, state, newBench);
+        case RECEIVE_REVIEW:
+            const { review, average_rating } = action;
+            const clone = Object.assign({}, state);
+            clone[review.bench_id].reviewIds.push(review.id);
+            clone[review.bench_id].average_rating = average_rating;
+            return clone;
         default: 
             return state;
     }
