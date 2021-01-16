@@ -15,14 +15,13 @@ export const receiveBench = ({ bench, reviews, authors }) => ({
 });
 
 export const fetchBenches = (data) => (dispatch, getState) => {
-    // const data = getState().ui.filters;
     return APIUtil.fetchBenches(data).then(benches => dispatch(receiveBenches(benches)))
 }
 
+export const fetchBench = id => (dispatch) =>
+    APIUtil.fetchBench(id)
+        .then(bench => dispatch(receiveBench(bench)))
+        
 export const createBench = (data) => (dispatch) => 
     APIUtil.createBench(data)
         .then(bench => dispatch(receiveBench(bench)))
-
-export const fetchBench = id => (dispatch) => 
-    APIUtil.fetchBench(id)
-        .then(bench => dispatch(recieveBench(bench)))

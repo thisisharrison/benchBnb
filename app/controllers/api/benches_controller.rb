@@ -18,7 +18,6 @@ class Api::BenchesController < ApplicationController
 
     def show
         @bench = Bench.find(params[:id])
-        render :show
     end
 
     private

@@ -9,7 +9,7 @@ class BenchShow extends React.Component {
     }
     
     render() {
-        const {bench, benchId, fetchBench} = this.props;
+        const {bench, benchId, fetchBench, reviews} = this.props;
         const benches = {
             [benchId]: bench
         }
