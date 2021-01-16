@@ -6,10 +6,11 @@ import BenchShow from './bench_show';
 const mapStateToProps = (state, ownProps) => {
     const benchId = parseInt(ownProps.match.params.benchId);
     const bench = selectBench(state, benchId);
-    // const reviews = selectReviewsForBench(state.entities, bench)
+    const reviews = selectReviewsForBench(state.entities, bench)
     return ({
         benchId,
         bench,
+        reviews
     })
 };
 
