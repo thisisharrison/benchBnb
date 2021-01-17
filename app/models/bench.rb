@@ -1,5 +1,7 @@
 class Bench < ApplicationRecord
     validates :description, :lat, :lng, :seating, presence: true
+    validate :ensure_with_photo
+
     has_many :reviews
 
     has_one_attached :photo
@@ -18,5 +20,11 @@ class Bench < ApplicationRecord
 
     def average_rating
         reviews.average(:rating)
+    end
+
+    def ensure_with_photo
+        unless self.photo.attached?
+            errors[:photo] << "must have photo"
+        end
     end
 end
