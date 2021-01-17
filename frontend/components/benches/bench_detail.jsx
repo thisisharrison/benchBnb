@@ -10,6 +10,7 @@ const BenchDetail = ({bench, reviews}) => {
     return (
         <div>
             <h1>{bench.description}</h1>
+            <img src={bench.photoUrl} alt=""/>
             <ul>
                 <li>Rating: {bench.average_rating || 'No reviews yet'}</li>
                 <li>Seats: {bench.seating}</li>

@@ -1,5 +1,6 @@
 json.bench do 
     json.partial! '/api/benches/bench', bench: @bench
+    json.photoUrl url_for(@bench.photo)
     json.reviewIds @bench.reviews.pluck(:id)
 end
 

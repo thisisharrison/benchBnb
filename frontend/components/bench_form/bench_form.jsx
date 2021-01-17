@@ -7,17 +7,28 @@ class BenchForm extends React.Component {
             description: '',
             seating: '',
             lat: this.props.lat,
-            lng: this.props.lng
+            lng: this.props.lng,
+            photoFile: null
         }
         this.handleInput = this.handleInput.bind(this);
+        this.handleFile = this.handleFile.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleInput(prop){
-        return (e) => this.setState({[prop] : e.target.value});
+        return (e) => this.setState({ [prop]: e.target.value });
     } 
+    handleFile(e) {
+        this.setState({ photoFile: e.target.files[0]});
+    }
     handleSubmit(e) {
         e.preventDefault();
-        this.props.createBench(this.state);
+        const formData = new FormData ();
+        formData.append('bench[description]', this.state.description)
+        formData.append('bench[seating]', this.state.seating)
+        formData.append('bench[lat]', this.state.lat)
+        formData.append('bench[lng]', this.state.lng)
+        formData.append('bench[photo]', this.state.photoFile)
+        this.props.createBench(formData);
         this.props.history.push('/');
     }
     render() {
@@ -48,6 +59,11 @@ class BenchForm extends React.Component {
                     <input type="text"
                         disabled
                         value={this.state.lng} />
+                </label>
+                <label>
+                    Photo:
+                    <input type="file"
+                        onChange={this.handleFile}/>
                 </label>
                 <input type="submit"
                     value="Submit"/>

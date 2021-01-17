@@ -7,6 +7,7 @@ export const receiveBenches = benches => ({
     benches
 });
 
+// bench show json 
 export const receiveBench = ({ bench, reviews, authors }) => ({
     type: RECEIVE_BENCH,
     bench, 
@@ -22,6 +23,10 @@ export const fetchBench = id => (dispatch) =>
     APIUtil.fetchBench(id)
         .then(bench => dispatch(receiveBench(bench)))
         
-export const createBench = (data) => (dispatch) => 
-    APIUtil.createBench(data)
-        .then(bench => dispatch(receiveBench(bench)))
+export const createBench = (data) => (dispatch) => {
+    return APIUtil.createBench(data)
+        .then(bench => {
+            debugger
+            dispatch(receiveBench(bench))
+        })
+}

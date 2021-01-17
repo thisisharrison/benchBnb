@@ -2,6 +2,8 @@ class Bench < ApplicationRecord
     validates :description, :lat, :lng, :seating, presence: true
     has_many :reviews
 
+    has_one_attached :photo
+
     def self.in_bounds(bounds)
         n_lat = bounds[:northEast][:lat]
         n_lng = bounds[:northEast][:lng]

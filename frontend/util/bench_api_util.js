@@ -7,11 +7,13 @@ export const fetchBenches = data => (
     })
 )
 
-export const createBench = bench => (
+export const createBench = formData => (
     $.ajax({
         method: 'POST',
         url: 'api/benches',
-        data: { bench },
+        data: formData,
+        contentType: false,
+        processData: false
     })
 )
 

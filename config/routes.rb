@@ -7,4 +7,6 @@ Rails.application.routes.draw do
     resources :benches, only: [:index, :create, :show] 
     resources :reviews, only: [:create]
   end
+  # For testing out AWS
+  resources :benches, only: :show
 end
