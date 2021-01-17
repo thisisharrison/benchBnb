@@ -8,7 +8,8 @@ class BenchForm extends React.Component {
             seating: '',
             lat: this.props.lat,
             lng: this.props.lng,
-            photoFile: null
+            photoFile: null, 
+            photoUrl: null
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleFile = this.handleFile.bind(this);
@@ -18,7 +19,12 @@ class BenchForm extends React.Component {
         return (e) => this.setState({ [prop]: e.target.value });
     } 
     handleFile(e) {
-        this.setState({ photoFile: e.target.files[0]});
+        const file = e.target.files[0]
+        const fileReader = new FileReader ();
+        fileReader.onloadend = () => this.setState({ photoFile: file, photoUrl: fileReader.result });
+        if (file) {
+            fileReader.readAsDataURL(file);
+        }
     }
     handleSubmit(e) {
         e.preventDefault();
@@ -32,6 +38,12 @@ class BenchForm extends React.Component {
         this.props.history.push('/');
     }
     render() {
+        const preview = this.state.photoUrl ? (
+            <div>
+                <h3>Preview</h3>
+                <img src={this.state.photoUrl} alt=""/>
+            </div>
+        ) : null
         return (
             <div>
                 <h1>Add Bench</h1>
@@ -65,6 +77,7 @@ class BenchForm extends React.Component {
                     <input type="file"
                         onChange={this.handleFile}/>
                 </label>
+                {preview}
                 <input type="submit"
                     value="Submit"/>
                 </form>

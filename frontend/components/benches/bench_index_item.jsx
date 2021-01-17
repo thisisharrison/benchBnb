@@ -11,9 +11,12 @@ class BenchIndexItem extends React.Component {
     }
     render() {
         const { bench: { id, description, lat, lng } } = this.props;
+        const photoUrl = this.props.bench.photoUrl ? 
+            <img className="index-img" src={this.props.bench.photoUrl} alt=""/> : ''
         return (
             <li onClick={this.handleClick}>
                 {id}: {description} ({lat}, {lng})
+                {photoUrl}
             </li>
         )
     }
