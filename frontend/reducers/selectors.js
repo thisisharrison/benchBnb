@@ -10,9 +10,9 @@ export const getMaxSeating = ({ ui: { filters: { maxSeating } }}) => (
     maxSeating
 )
 
-export const selectBench = ({entities: {benches}}, benchId) => (
-    benches[benchId]
-)
+export const selectBench = ({entities: {benches}}, benchId) => {
+    return benches[benchId] || { reviewIds: [] }
+}
 
 export const selectReviewsForBench = ({benches, reviews}, bench) => {
     return bench.reviewIds.map(reviewId => reviews[reviewId])

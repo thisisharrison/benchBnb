@@ -1,4 +1,3 @@
-import { RECEIVE_CURRENT_USER } from '../../../../benchBnb-solution/frontend/actions/session_actions';
 import {
     RECEIEVE_CURRENT_USER,
     RECEIEVE_SESSION_ERRORS

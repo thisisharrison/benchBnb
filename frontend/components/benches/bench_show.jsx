@@ -9,7 +9,6 @@ class BenchShow extends React.Component {
     constructor(props) {
         super(props);
     }
-    
     render() {
         const {bench, benchId, fetchBench, reviews} = this.props;
         const benches = {
